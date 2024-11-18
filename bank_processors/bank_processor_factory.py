@@ -11,6 +11,7 @@ class BankProcessorFactory:
     processors = {
         "bbva": BBVAProcessor,
         "banbajio" : BanbajioProcessor,
+        "banregio": BanregioProcessor,
         "banorte": BanorteProcessor
     }
 
