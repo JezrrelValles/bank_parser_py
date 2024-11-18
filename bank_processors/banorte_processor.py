@@ -56,13 +56,15 @@ class BanorteProcessor(BankProcessor):
                             
                             if table:
                     
-                                date_pattern = r'\d{2}\s*-\s*[A-Z]{3}\s*-\s*\d{2}'
+                                date_pattern = r'\d{1,2}\s*-\s*[A-Z]{3}\s*-\s*\d{1,2}'
                                 
                                 for row in table:
                                     row_str = ' '.join(row)
          
                                     if re.search(date_pattern, row_str):  
                                         extracted_text.append(row) 
+                                    else:
+                                        print("No funciono:", row)
             
  
                             # if "DETALLE DE MOVIMIENTOS (PESOS)▼" in lines:
