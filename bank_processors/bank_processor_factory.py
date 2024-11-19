@@ -4,6 +4,7 @@ from bank_processors.bbva_processor import BBVAProcessor
 from bank_processors.banbajio_processor import BanbajioProcessor
 from bank_processors.banregio_processor import BanregioProcessor
 from bank_processors.banorte_processor import BanorteProcessor
+from bank_processors.banamex_processor import BanamexProccesor
 class BankProcessorFactory:
     """
     A factory class to dynamically instantiate the correct bank processor.
@@ -12,7 +13,8 @@ class BankProcessorFactory:
         "bbva": BBVAProcessor,
         "banbajio" : BanbajioProcessor,
         "banregio": BanregioProcessor,
-        "banorte": BanorteProcessor
+        "banorte": BanorteProcessor,
+        "banamex": BanamexProccesor
     }
 
     @staticmethod
