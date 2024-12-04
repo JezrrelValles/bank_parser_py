@@ -7,6 +7,7 @@ from bank_processors.banorte_processor import BanorteProcessor
 from bank_processors.banamex_processor import BanamexProccesor
 from bank_processors.hsbc_processor import BancoHsbc
 from bank_processors.santander_processor import SantanderProcessor
+from bank_processors.scotiabank_processor import ScotiabankProcessor
 class BankProcessorFactory:
     """
     A factory class to dynamically instantiate the correct bank processor.
@@ -19,6 +20,7 @@ class BankProcessorFactory:
         "banamex": BanamexProccesor,
         "hsbc": BancoHsbc,
         "santander": SantanderProcessor,
+        "scotiabank": ScotiabankProcessor
     }
 
     @staticmethod
