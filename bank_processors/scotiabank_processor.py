@@ -59,11 +59,11 @@ class ScotiabankProcessor(BankProcessor):
                         table = page.extract_table(table_settings)
                         if table:
                             print(f"Table found on page {i + 1}")
-                            print(table)
+                            #print(table)
                       
-                            im = page.to_image()
-                            im.reset().debug_tablefinder(table_settings)
-                            im.save(f"page_{i + 1}_debug.png")
+                            # im = page.to_image()
+                            # im.reset().debug_tablefinder(table_settings)
+                            # im.save(f"page_{i + 1}_debug.png")
                             
                             #print(tabulate(table))
                             # Patrones de fecha y hora

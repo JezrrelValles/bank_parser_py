@@ -24,9 +24,9 @@ class BBVAProcessor(BankProcessor):
                     #OPERACION empieza en la coordenada 475, entonces se recorta
                     #Se le quita 6% de abajo (informacion del banco no util)
                     if  i+1 > 1:
-                        page = page.crop((0,page.height * 0.15 ,475, page.height*0.94))
+                        page = page.crop((0,page.height * 0.15 ,475, page.height*0.97))
                     else:
-                        page = page.crop((0, 0 ,475, page.height*0.94))
+                        page = page.crop((0, 0 ,475, page.height*0.97))
                     try:
                         print(f"Text on page {i + 1}:")
                         text = page.extract_text()
@@ -64,9 +64,8 @@ class BBVAProcessor(BankProcessor):
                                     row_str = ' '.join(row)
 
                                     if re.search(date_pattern, row_str):  
-                                        extracted_text.append(row) 
-                                        print(row)  
-                                    
+                                        extracted_text.append(row)
+                                        print(row) 
  
                             if "Detalle de Movimientos Realizados" in lines:
                                 
