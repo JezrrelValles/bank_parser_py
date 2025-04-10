@@ -19,14 +19,18 @@ class BanregioProcessor(BankProcessor):
                 
                 extracted_text = []
                 capturing = False 
-                
-                for i, page in enumerate(pdf.pages):
-                    #Quitar el encabezado de las paginas
-                    #page = page.crop((0,page.height * 0.04 ,page.width, page.height))
-                  
+                context = ""
+                for i, page in enumerate(pdf.pages):  
                     try:
                         print(f"Text on page {i + 1}:")
-                     
+                        if i ==0:
+                            #This cut the right top segment of page to extract some context and send to assistant
+                            #For example:
+                            #ESTADO DE CUENTA UNICO
+                            #del 01 al 30 de SEPTIEMBRE 2024
+                            context = page.crop((page.width* 0.70, 0, page.width, page.height * 0.07)).extract_text()
+                            extracted_text.append(context)
+                  
                         text = page.extract_text()
                         print(text)
              
@@ -67,9 +71,9 @@ class BanregioProcessor(BankProcessor):
                                     # Aplicar la expresión regular sobre la cadena unificada (row_str)
                                     if re.search(date_pattern, row_str):  
                                         extracted_text.append(row) 
-                                        print(f"ROW INCLUDE: {row_str}")  # Mostrar la línea que coincide con el patrón
-                                    else:
-                                        print(f"NO MATCH: {row_str}") 
+                                        #print(f"ROW INCLUDE: {row_str}")  # Mostrar la línea que coincide con el patrón
+                                    #else:
+                                        #print(f"NO MATCH: {row_str}") 
  
                     except Exception as e:
                         print(f"Error extracting text from page {i + 1}: {e}")
