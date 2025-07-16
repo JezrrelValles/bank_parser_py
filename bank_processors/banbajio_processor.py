@@ -18,7 +18,8 @@ class BanbajioProcessor(BankProcessor):
                 print(f"Number of pages in the PDF: {num_pages}")
                 
                 extracted_text = []
-                capturing = False 
+                capturing = False
+                initial_balance_captured = False
                 
                 for i, page in enumerate(pdf.pages):
                     try:
@@ -36,11 +37,20 @@ class BanbajioProcessor(BankProcessor):
                                 # Verificar si la línea empieza con 'DETALLE DE LA CUENTA:'
                                 if line.startswith("DETALLE DE LA CUENTA:"):
                                     capturing = True
+                                    initial_balance_captured = False
                                     print(f"Found 'DETALLE DE LA CUENTA:' on page {i + 1}")
                                     continue  # Saltar a la siguiente línea para iniciar captura
 
                                 # Si se está capturando, verificar el patrón de fecha
                                 if capturing:
+                                    
+                                    # Capturar SALDO INICIAL si aun no ha sido capturado
+                                    if not initial_balance_captured and "SALDO INICIAL" in line:
+                                        extracted_text.append(line)
+                                        initial_balance_captured = True
+                                        print(f"SALDO INICIAL: {line}")
+                                        continue
+
                                     date_pattern = r'^\d{1,2}\s[A-Z]{3}'  
                                     
                                     if re.match(date_pattern, line):  #
@@ -70,7 +80,9 @@ class BanbajioProcessor(BankProcessor):
         processed_data = []
         
         for line in raw_data:
-            if re.match(date_pattern, line):
+            if "SALDO INICIAL" in line:
+                processed_data.append(line)
+            elif re.match(date_pattern, line):
                 line = re.sub(r'(\d{1,2}\s[A-Z]{3}).*?\$', r'\1   $', line)
                 processed_data.append(line)
             else:
