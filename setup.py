@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 setup(
     name="bank_parser_py",
     version="0.3.0",
-    author="Adrian Rivas",
+    author="Jezrrel Valles",
     description="Preprocessing python program for invoices",
-    url="https://github.com/AdrianRvzz/bank_parser_py",
+    url="https://github.com/JezrrelValles/bank_parser_py",
     packages=find_packages(),
     install_requires=[
         'cffi==1.17.1',

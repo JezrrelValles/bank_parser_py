@@ -58,7 +58,7 @@ class BanbajioProcessor(BankProcessor):
                                         print(f"Captured line: {line}")
                                         
                                             
-                                if "TOTAL DE MOVIMIENTOS" in line:
+                                if "SALDO TOTAL*" in line or "TOTAL DE MOVIMIENTOS" in line:
                                     capturing = False
                                     print(f"Found 'TOTAL DE MOVIMIENTOS' on page {i + 1}")
                                     break  
