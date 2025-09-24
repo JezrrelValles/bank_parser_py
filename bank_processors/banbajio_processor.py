@@ -20,8 +20,13 @@ class BanbajioProcessor(BankProcessor):
                 extracted_text = []
                 capturing = False
                 initial_balance_captured = False
+                finished = False
                 
                 for i, page in enumerate(pdf.pages):
+                    if finished:
+                        break
+
+
                     try:
                         print(f"Text on page {i + 1}:")
                         text = page.extract_text()
@@ -60,6 +65,7 @@ class BanbajioProcessor(BankProcessor):
                                             
                                 if "SALDO TOTAL*" in line or "TOTAL DE MOVIMIENTOS" in line:
                                     capturing = False
+                                    finished = True
                                     print(f"Found 'TOTAL DE MOVIMIENTOS' on page {i + 1}")
                                     break  
                         
